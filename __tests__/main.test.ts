@@ -1,7 +1,4 @@
 import {expect, test} from '@jest/globals'
-import * as cp from 'child_process'
-import * as path from 'path'
-import * as process from 'process'
 import {clean} from '../src/clean'
 
 test('clean - basic', () => {
@@ -18,6 +15,6 @@ test('clean - maxLength and removeTrailingDash', () => {
   ).toEqual('deploy')
 })
 
-test('clean - remove /refs/heads from string', () => {
-  expect(clean('/refs/heads/main')).toEqual('main')
+test('clean - remove refs/heads from string', () => {
+  expect(clean('refs/heads/main')).toEqual('main')
 })

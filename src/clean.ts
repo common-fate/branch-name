@@ -6,8 +6,8 @@ export interface CleanOptions {
 export const clean = (s: string, options?: CleanOptions): string => {
   let output = s
 
-  if (output.startsWith('/refs/heads/')) {
-    output = output.split('/refs/heads/')[1]
+  if (output.startsWith('refs/heads/')) {
+    output = output.split('refs/heads/')[1]
   }
 
   output = output.replace(/[^\w]/g, '-')
