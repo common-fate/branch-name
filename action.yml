@@ -1,6 +1,9 @@
 name: 'Clean Branch Name'
 description: 'Sanitizes and trims a branch name'
 author: 'Common Fate'
+branding:
+  icon: at-sign
+  color: blue
 inputs:
   branch:
     required: false
