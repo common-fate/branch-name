@@ -1,11 +1,22 @@
-name: 'Your name here'
-description: 'Provide a description here'
-author: 'Your name or organization here'
+name: 'Clean Branch Name'
+description: 'Sanitizes and trims a branch name'
+author: 'Common Fate'
 inputs:
-  milliseconds: # change this
-    required: true
-    description: 'input description here'
-    default: 'default value if applicable'
+  branch:
+    required: false
+    description: 'override the input branch name (will default to the branch the action is running in if not provided)'
+  max-length:
+    required: false
+    description: ensure that branches are never longer than this length by truncating them
+  remove-trailing-dash:
+    required: false
+    description: removes a trailing dash from a branch name
+    default: 'true'
+outputs:
+  branch:
+    description: 'the cleaned branch name'
+  raw_branch_input:
+    description: 'the input branch name'
 runs:
   using: 'node16'
   main: 'dist/index.js'
