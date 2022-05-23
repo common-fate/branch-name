@@ -1,6 +1,6 @@
-# clean-branch-name
+# branch-name
 
-A GitHub action to sanitize branch names.
+A GitHub action to retrieve and sanitize branch names.
 
 ## Usage
 
@@ -16,7 +16,7 @@ jobs:
     steps:
       - uses: actions/checkout@v1
 
-      - uses: common-fate/clean-branch-name
+      - uses: common-fate/branch-name
         name: Get branch name
         id: branch
         with:
