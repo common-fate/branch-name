@@ -13,7 +13,7 @@ inputs:
     description: removes a trailing dash from a branch name
     default: 'true'
 outputs:
-  branch:
+  name:
     description: 'the cleaned branch name'
   raw_branch_input:
     description: 'the input branch name'

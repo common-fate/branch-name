@@ -20,5 +20,9 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: ./
+        id: branch
         with:
-          milliseconds: 1000
+          max-length: 32
+
+      - name: Print branch name
+        run: ${{ steps.branch.outputs.name }}
