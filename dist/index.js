@@ -81,7 +81,7 @@ function run() {
                 removeTrailingDash: removeTrailingDash === 'true'
             });
             core.info(`Output branch name: ${output}`);
-            core.setOutput('branch', output);
+            core.setOutput('name', output);
             core.setOutput('raw_branch_input', branch);
         }
         catch (error) {
