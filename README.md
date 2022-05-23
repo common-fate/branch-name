@@ -26,5 +26,5 @@ jobs:
 
       - name: Print branch name
         # use the branch name as follows
-        run: ${{ steps.branch.outputs.name }}
+        run: echo ${{ steps.branch.outputs.name }}
 ```

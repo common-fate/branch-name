@@ -25,4 +25,4 @@ jobs:
           max-length: 32
 
       - name: Print branch name
-        run: ${{ steps.branch.outputs.name }}
+        run: echo ${{ steps.branch.outputs.name }}
