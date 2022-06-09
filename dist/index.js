@@ -8,7 +8,7 @@ require('./sourcemap-register.js');/******/ (() => { // webpackBootstrap
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.clean = void 0;
-const clean = (s, options) => {
+const clean = (s, options = { lowercase: true }) => {
     let output = s;
     if (output.startsWith('refs/heads/')) {
         output = output.split('refs/heads/')[1];
@@ -19,6 +19,9 @@ const clean = (s, options) => {
     }
     if ((options === null || options === void 0 ? void 0 : options.removeTrailingDash) && output.endsWith('-')) {
         output = output.slice(0, -1);
+    }
+    if (options.lowercase) {
+        output = output.toLocaleLowerCase();
     }
     return output;
 };
@@ -75,10 +78,14 @@ function run() {
             const removeTrailingDash = core.getInput('remove-trailing-dash', {
                 required: false
             });
+            const lowercase = core.getInput('lowercase', {
+                required: false
+            });
             core.info(`Input: ${branch}`);
             const output = (0, clean_1.clean)(branch, {
                 maxLength,
-                removeTrailingDash: removeTrailingDash === 'true'
+                removeTrailingDash: removeTrailingDash === 'true',
+                lowercase: lowercase === 'true'
             });
             core.info(`Output branch name: ${output}`);
             core.setOutput('name', output);

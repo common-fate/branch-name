@@ -1,9 +1,13 @@
 export interface CleanOptions {
   maxLength?: number
   removeTrailingDash?: boolean
+  lowercase: boolean
 }
 
-export const clean = (s: string, options?: CleanOptions): string => {
+export const clean = (
+  s: string,
+  options: CleanOptions = {lowercase: true}
+): string => {
   let output = s
 
   if (output.startsWith('refs/heads/')) {
@@ -18,6 +22,10 @@ export const clean = (s: string, options?: CleanOptions): string => {
 
   if (options?.removeTrailingDash && output.endsWith('-')) {
     output = output.slice(0, -1)
+  }
+
+  if (options.lowercase) {
+    output = output.toLocaleLowerCase()
   }
 
   return output

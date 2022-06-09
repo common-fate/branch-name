@@ -15,6 +15,10 @@ inputs:
     required: false
     description: removes a trailing dash from a branch name
     default: 'true'
+  lowercase:
+    required: false
+    description: make the branch name lowercase
+    default: 'true'
 outputs:
   name:
     description: 'the cleaned branch name'
