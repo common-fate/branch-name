@@ -17,11 +17,16 @@ async function run(): Promise<void> {
       required: false
     })
 
+    const lowercase = core.getInput('lowercase', {
+      required: false
+    })
+
     core.info(`Input: ${branch}`)
 
     const output = clean(branch, {
       maxLength,
-      removeTrailingDash: removeTrailingDash === 'true'
+      removeTrailingDash: removeTrailingDash === 'true',
+      lowercase: lowercase === 'true'
     })
 
     core.info(`Output branch name: ${output}`)
