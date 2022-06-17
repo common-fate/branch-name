@@ -13,8 +13,6 @@ const getBranchName = (): string => {
 
 async function run(): Promise<void> {
   try {
-    core.info(`github context: ${JSON.stringify(github.context)}`)
-
     const branch = getBranchName()
 
     const maxLengthString =
@@ -38,6 +36,7 @@ async function run(): Promise<void> {
     })
 
     core.info(`Output branch name: ${output}`)
+    core.info(`github context: ${JSON.stringify(github.context)}`)
 
     core.setOutput('name', output)
     core.setOutput('raw_branch_input', branch)
