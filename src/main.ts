@@ -2,12 +2,24 @@ import * as core from '@actions/core'
 import * as github from '@actions/github'
 import {clean} from './clean'
 
+const getBranchName = (): string => {
+  const branch =
+    core.getInput('branch', {required: false}) ||
+    github.context.ref ||
+    process.env.GITHUB_HEAD_REF ||
+    ''
+
+  if (branch != '') return branch
+  // if we're triggered from a branch delete event, the ref is part of the payload.
+  if (github.context.payload.ref != null) return github.context.payload.ref
+  return ''
+}
+
 async function run(): Promise<void> {
   try {
-    const branch =
-      core.getInput('branch', {required: false}) ||
-      process.env.GITHUB_HEAD_REF ||
-      github.context.ref
+    core.debug(`github context: ${JSON.stringify(github.context)}`)
+
+    const branch = getBranchName()
 
     const maxLengthString =
       core.getInput('max-length', {required: false}) || undefined
