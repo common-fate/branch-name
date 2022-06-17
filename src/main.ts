@@ -2,12 +2,20 @@ import * as core from '@actions/core'
 import * as github from '@actions/github'
 import {clean} from './clean'
 
+const getBranchName = (): string => {
+  const branchInput = core.getInput('branch', {required: false})
+
+  if (branchInput !== '') return branchInput
+  if (github.context.eventName === 'delete') return github.context.payload.ref
+
+  return github.context.ref || process.env.GITHUB_HEAD_REF || ''
+}
+
 async function run(): Promise<void> {
   try {
-    const branch =
-      core.getInput('branch', {required: false}) ||
-      process.env.GITHUB_HEAD_REF ||
-      github.context.ref
+    core.debug(`github context: ${JSON.stringify(github.context)}`)
+
+    const branch = getBranchName()
 
     const maxLengthString =
       core.getInput('max-length', {required: false}) || undefined

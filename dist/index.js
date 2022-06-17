@@ -67,12 +67,19 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 const core = __importStar(__nccwpck_require__(2186));
 const github = __importStar(__nccwpck_require__(5438));
 const clean_1 = __nccwpck_require__(1545);
+const getBranchName = () => {
+    const branchInput = core.getInput('branch', { required: false });
+    if (branchInput !== '')
+        return branchInput;
+    if (github.context.eventName === 'delete')
+        return github.context.payload.ref;
+    return github.context.ref || process.env.GITHUB_HEAD_REF || '';
+};
 function run() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            const branch = core.getInput('branch', { required: false }) ||
-                process.env.GITHUB_HEAD_REF ||
-                github.context.ref;
+            core.debug(`github context: ${JSON.stringify(github.context)}`);
+            const branch = getBranchName();
             const maxLengthString = core.getInput('max-length', { required: false }) || undefined;
             const maxLength = maxLengthString ? parseInt(maxLengthString) : undefined;
             const removeTrailingDash = core.getInput('remove-trailing-dash', {
