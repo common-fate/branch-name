@@ -13,7 +13,7 @@ const getBranchName = (): string => {
 
 async function run(): Promise<void> {
   try {
-    core.debug(`github context: ${JSON.stringify(github.context)}`)
+    core.info(`github context: ${JSON.stringify(github.context)}`)
 
     const branch = getBranchName()
 
