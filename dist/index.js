@@ -77,7 +77,7 @@ const getBranchName = () => {
         return branchInput;
     if (github.context.eventName === 'delete')
         return github.context.payload.ref;
-    return github.context.ref || process.env.GITHUB_HEAD_REF || '';
+    return process.env.GITHUB_HEAD_REF || github.context.ref || '';
 };
 function run() {
     return __awaiter(this, void 0, void 0, function* () {

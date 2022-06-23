@@ -8,7 +8,7 @@ const getBranchName = (): string => {
   if (branchInput !== '') return branchInput
   if (github.context.eventName === 'delete') return github.context.payload.ref
 
-  return github.context.ref || process.env.GITHUB_HEAD_REF || ''
+  return process.env.GITHUB_HEAD_REF || github.context.ref || ''
 }
 
 async function run(): Promise<void> {
